@@ -26,9 +26,17 @@ class CardCollection implements \Countable, \Iterator, \ArrayAccess
         return count($this->cards);
     }
 
-    public function add($card): self
+    public function add(Card $card): self
     {
         $this->cards[] = $card;
+        return $this;
+    }
+
+    public function addCollection(CardCollection $cardCollection) : self
+    {
+        foreach (clone $cardCollection as $card) {
+            $this->add($card);
+        }
         return $this;
     }
 
